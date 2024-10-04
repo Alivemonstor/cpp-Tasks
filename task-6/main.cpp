@@ -1,14 +1,59 @@
 #include "main.h"
+#include <map>
+
+using namespace std;
 
 int main(int argc, char* argv[])
 {
-    //The project is currently set up with a function to produce random numbers between
-    //intervals that you specify. Modify the current solution to provide the functionality
-    //requested by the document that outlines the challenges.
-    
-    //Here is an example just showing how you use the random(min, max) function:
-    std::cout << "Here is a random number between 1 and 10: " << random(1, 10) << std::endl;
-    std::cout << "And here is one between -3 and -5: " << random(-3, -5) << std::endl;
+    const int RNG = random(0, 100);
+    int amountOfGuesses = 0;
+    bool hasGuessed = false;
+    int userGuess = 0;
+
+    cout << RNG << endl;
+
+    map<int, string> mp;
+    mp[50] = "freezing";
+    mp[35] = "colder";
+    mp[25] = "cold";
+    mp[15] = "warm";
+    mp[10] = "warmer";
+    mp[5] = "hot";
+    mp[3] = "hotter";
+    mp[1] = "boiling";
+
+
+    while (hasGuessed == false) {
+        cout << "Please enter a guess: ";
+        cin >> userGuess;
+
+        if (cin.fail() || userGuess > 100 || userGuess < 0) {
+            cerr << "Please enter a valid number between 0-100." << endl;
+        }
+        else {
+            int diff = abs(userGuess - RNG);
+
+            amountOfGuesses++;
+            
+            if (diff == 0) {
+                cout << "Well done! The number was:" << RNG << " It took you " << amountOfGuesses << " guesses.";
+                hasGuessed = true;
+            }
+
+            map<int, string>::iterator it = mp.begin();
+
+            while (it != mp.end()) {
+                if (diff >= it->first) {
+                    cout << it->second << endl;
+                    it++;
+                }
+                it = mp.end();
+            }
+        }
+
+
+    }
+
 
     return 0;
 }
