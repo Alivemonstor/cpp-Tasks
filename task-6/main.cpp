@@ -1,5 +1,7 @@
 #include "main.h"
 #include <map>
+#include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -23,7 +25,7 @@ int main(int argc, char* argv[])
     mp[1] = "boiling";
 
 
-    while (hasGuessed == false) {
+    while (true) {
         cout << "Please enter a guess: ";
         cin >> userGuess;
 
@@ -37,23 +39,18 @@ int main(int argc, char* argv[])
             
             if (diff == 0) {
                 cout << "Well done! The number was:" << RNG << " It took you " << amountOfGuesses << " guesses.";
-                hasGuessed = true;
+                return 0;
             }
 
-            map<int, string>::iterator it = mp.begin();
 
-            while (it != mp.end()) {
-                if (diff >= it->first) {
-                    cout << it->second << endl;
-                    it++;
+            for (auto const& [key, val] : mp)
+            {
+                if (key >= diff)
+                {
+                    cout << val << endl;
+                    break;
                 }
-                it = mp.end();
             }
         }
-
-
     }
-
-
-    return 0;
 }
