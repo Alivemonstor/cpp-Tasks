@@ -61,28 +61,20 @@ int main(int argc, char* argv[])
     // Creating the shop
 
     vector<ShopItem> shopVec;
-    ShopItem shop;
 
-    shop = CreateShopItem("Great Sword", "Sword", 40, 100, "Knight");
-    shopVec.push_back(shop);
+    shopVec.push_back(CreateShopItem("Great Sword", "Sword", 40, 100, "Knight"));
 
-    shop = CreateShopItem("Scimitar", "Sword", 35, 75, "Knight");
-    shopVec.push_back(shop);
+    shopVec.push_back(CreateShopItem("Scimitar", "Sword", 35, 75, "Knight"));
 
-    shop = CreateShopItem("Dagger", "Sword", 10, 35, "Knight");
-    shopVec.push_back(shop);
+    shopVec.push_back(CreateShopItem("Dagger", "Sword", 10, 35, "Knight"));
 
-    shop = CreateShopItem("Longbow", "Bow", 20, 55, "Archer");
-    shopVec.push_back(shop);
+    shopVec.push_back(CreateShopItem("Longbow", "Bow", 20, 55, "Archer"));
 
-    shop = CreateShopItem("Crossbow", "Bow", 40, 100, "Archer");
-    shopVec.push_back(shop);
+    shopVec.push_back(CreateShopItem("Crossbow", "Bow", 40, 100, "Archer"));
 
-    shop = CreateShopItem("Rusty spear", "Spear", 10, 35, "Spearman");
-    shopVec.push_back(shop);
+    shopVec.push_back(CreateShopItem("Rusty spear", "Spear", 10, 35, "Spearman"));
 
-    shop = CreateShopItem("Iron spear", "Spear", 20, 65, "Spearman");
-    shopVec.push_back(shop);
+    shopVec.push_back(CreateShopItem("Iron spear", "Spear", 20, 65, "Spearman"));
 
     for (int i = 0; i < curPlayers.size(); i++) {
 
