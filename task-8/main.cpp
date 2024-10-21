@@ -9,9 +9,9 @@ using namespace std;
 
 class Items {
 	public:
-		string name;
-		string description;
-		int quantity;
+		string name = "Empty";
+		string description = "Nothing";
+		int quantity = 0;
 };
 
 
@@ -25,9 +25,25 @@ Items AddItem(string name, string desc, int quant) {
 	return invItem;
 }
 
+vector<Items> itemSelection;
+
 void setItem(vector<Items>& inventory) {
 	int itemSelect;
+
 	cout << "Please Pick an item : " << endl;
+
+	for (int i = 0; i < itemSelection.size(); i++)
+	{
+		cout << itemSelection[i].name << endl;
+	}
+
+	cin >> itemSelect;
+
+	if (cin.fail()) {
+		cerr << "Please enter a number" << endl;
+		cin.ignore(numeric_limits<streamsize>::max());
+		return;
+	}
 }
 
 
@@ -35,22 +51,31 @@ void setItem(vector<Items>& inventory) {
 void help(vector<Items>& inventory) {
 	cout << "Here are a list of all of the commands: " << endl;
 
-	cout << 1 << endl;
+	map<string, function<void(vector<Items>& inventory)>> func_list{
+		{"help", help},
+		{"AddItem", setItem},
+	};
 
 	for (auto const& [key, val] : func_list)
 	{
-		cout << key;
+		cout << key << endl;
 	}
 };
 
 
+
+
 int main(int argc, char* argv[])
 {
+	itemSelection.push_back(AddItem("Shield", "A strong shield", 1));
+	itemSelection.push_back(AddItem("Potion", "A strength potion", 1));
+	itemSelection.push_back(AddItem("Gloves", "Leather Gloves", 1));
 
 	map<string, function<void(vector<Items>& inventory)>> func_list{
 		{"help", help},
 		{"AddItem", setItem},
 	};
+
 
 	vector<Items> inventory;
 	vector<Items> itemShop;
@@ -65,15 +90,18 @@ int main(int argc, char* argv[])
 		cerr << "Please enter a number." << endl;
 	}
 
-	cout << "What would you like to do? Type help for a list of all of the commands!" << endl;
-	cin >> commandInput;
+	while (true) {
+		commandInput = "";
+		cout << "What would you like to do? Type help for a list of all of the commands!" << endl;
+		cin >> commandInput;
 
-	if (cin.fail() || func_list.find(commandInput) == func_list.end()) {
-		cerr << "Please enter a valid command" << endl;
-	}
+		if (cin.fail() || func_list.find(commandInput) == func_list.end()) {
+			cerr << "Please enter a valid command" << endl;
+		}
 
-	if (func_list.find(commandInput) != func_list.end()) {
-		func_list[commandInput](inventory);
+		if (func_list.find(commandInput) != func_list.end()) {
+			func_list[commandInput](inventory);
+		}
 	}
 
 

@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
 
     for (char c : userInput)
     {
-        if (!isalpha(c) && !isspace(c) && c != '.' && c != '!' && c != '?') {
+        if (!isalpha(static_cast<unsigned char>(c)) && !isspace(static_cast<unsigned char>(c)) && c != '.' && c != '!' && c != '?') {
             cerr << "This string contains a non alphabetical character";
             return 0;
         }
@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
     for (char c : userInput)
     {
 
-		if (isalpha(c) && hasFound)
+		if (isalpha(static_cast<unsigned char>(c)) && hasFound)
 		{
             cout << char(toupper(c));
 			hasFound = false;
@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
     {
         if (index % 2 == 0)
         {
-            cout << char(isupper(c) ? tolower(c) : toupper(c));
+            cout << char(isupper(static_cast<unsigned char>(c)) ? tolower(c) : toupper(c));
         }
         else
         {
