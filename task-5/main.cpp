@@ -62,7 +62,7 @@ int main(int argc, char* argv[])
             cout << c;
         }
 
-        if (isalpha(c)) {
+        if (isalpha(static_cast<unsigned char>(c))) {
             index++;
         }
     }

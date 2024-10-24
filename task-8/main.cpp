@@ -40,7 +40,7 @@ void SetItem(vector<Items>& inventory) {
 	cin >> itemSelect;
 
 
-	while (!cin.good()){
+	while (!cin.good() || itemSelect > itemSelection.size() - 1){
 		cerr << "Please enter a number." << endl;
 
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -70,7 +70,7 @@ void SetItem(vector<Items>& inventory) {
 
 	cin >> itemSelectNew;
 
-	while (!cin.good()) {
+	while (!cin.good() || itemSelectNew > inventory.size() - 1) {
 		cerr << "Please enter a number." << endl;
 
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -91,11 +91,10 @@ void SetItem(vector<Items>& inventory) {
 	else {
 		inventory[itemSelectNew].name = itemSelection[itemSelect].name;
 		inventory[itemSelectNew].description = itemSelection[itemSelect].description;
-		inventory[itemSelectNew].quantity == itemSelection[itemSelect].quantity;
+		inventory[itemSelectNew].quantity = itemSelection[itemSelect].quantity;
 	}
 
 	cin.clear();
-	return;
 }
 
 void ShowAll(vector<Items>& inventory) {
@@ -120,7 +119,7 @@ void View(vector<Items>& inventory) {
 	cin >> itemSelect;
 
 
-	while (!cin.good()) {
+	while (!cin.good() || itemSelect > inventory.size()-1) {
 		cerr << "Please enter a slot number." << endl;
 
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -135,6 +134,19 @@ void View(vector<Items>& inventory) {
 		cin >> itemSelect;
 	}
 
+	cout << "Name: " << inventory[itemSelect].name << endl;
+	cout << "Description: " << inventory[itemSelect].description << endl;
+	cout << "Quantity: " << inventory[itemSelect].quantity << endl;
+
+};
+
+void ShowAllItems(vector<Items>& inventory) {
+	cout << "Here's what items you can pick from: " << endl;
+
+	for (int i = 0; i < itemSelection.size(); i++) {
+		cout << "Slot " << i << ": " << itemSelection[i].name << endl;
+	}
+
 };
 
 void Help(vector<Items>& inventory) {
@@ -145,6 +157,8 @@ void Help(vector<Items>& inventory) {
 		{"set", SetItem},
 		{"show_all", ShowAll},
 		{"view", View},
+		{"items", ShowAllItems},
+		{"exit", ShowAllItems},
 	};
 
 	for (auto const& [key, val] : func_list)
@@ -166,6 +180,8 @@ int main(int argc, char* argv[])
 		{"set", SetItem},
 		{"show_all", ShowAll},
 		{"view", View},
+		{"items", ShowAllItems},
+
 	};
 
 	vector<Items> inventory;
@@ -195,6 +211,10 @@ int main(int argc, char* argv[])
 		string commandInput = {};
 		cout << "What would you like to do? Type help for a list of all of the commands!\n";
 		getline(cin, commandInput);
+
+		if (commandInput == "exit") {
+			break;
+		};
 
 		if (cin.fail() || func_list.find(commandInput) == func_list.end()) {
 			cerr << "Please enter a valid command" << endl;
