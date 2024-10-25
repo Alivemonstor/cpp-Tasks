@@ -7,27 +7,23 @@
 using namespace std;
 
 
-class Items {
-	public:
-		string name;
-		string description;
-		int quantity;
+class Item {
+public:
+	string name;
+	string description;
+	int quantity;
+public:
+	Item(const string& inName, const string& inDescription, const int& inQuantity)
+		: name(inName)
+		, description(inDescription)
+		, quantity(inQuantity)
+	{}
 };
 
 
-Items AddItem(string name, string desc, int quant) {
-	Items invItem;
+vector<Item> itemSelection;
 
-	invItem.name = name;
-	invItem.description = desc;
-	invItem.quantity = quant;
-
-	return invItem;
-}
-
-vector<Items> itemSelection;
-
-void SetItem(vector<Items>& inventory) {
+void SetItem(vector<Item>& inventory) {
 	int itemSelect;
 
 	cout << "Please Pick an item : " << endl;
@@ -97,7 +93,7 @@ void SetItem(vector<Items>& inventory) {
 	cin.clear();
 }
 
-void ShowAll(vector<Items>& inventory) {
+void ShowAll(vector<Item>& inventory) {
 	cout << "Here's what your inventory currently has: " << endl;
 
 	for (int i = 0; i < inventory.size(); i++) {
@@ -106,7 +102,7 @@ void ShowAll(vector<Items>& inventory) {
 
 };
 
-void View(vector<Items>& inventory) {
+void View(vector<Item>& inventory) {
 	int itemSelect;
 
 	cout << "Please Pick an inventory slot : " << endl;
@@ -134,14 +130,16 @@ void View(vector<Items>& inventory) {
 		cin >> itemSelect;
 	}
 
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
 	cout << "Name: " << inventory[itemSelect].name << endl;
 	cout << "Description: " << inventory[itemSelect].description << endl;
 	cout << "Quantity: " << inventory[itemSelect].quantity << endl;
 
 };
 
-void ShowAllItems(vector<Items>& inventory) {
-	cout << "Here's what items you can pick from: " << endl;
+void ShowAllItems(vector<Item>& inventory) {
+	cout << "Here's what Item you can pick from: " << endl;
 
 	for (int i = 0; i < itemSelection.size(); i++) {
 		cout << "Slot " << i << ": " << itemSelection[i].name << endl;
@@ -149,16 +147,58 @@ void ShowAllItems(vector<Items>& inventory) {
 
 };
 
-void Help(vector<Items>& inventory) {
+void Clear(vector<Item>& inventory) {
+	cout << "Clearing the inventory" << endl;
+
+	int inventorySlots = inventory.size();
+
+
+	inventory.clear();
+
+	for (int i = 0; i < inventorySlots; i++) {
+		inventory.push_back(Item("Empty", "None", 0));
+	}
+};
+
+void Restart(vector<Item>& inventory) {
+	cout << "Restarting" << endl;
+	inventory.clear();
+
+	int inventorySlots;
+
+	cout << "How many inventory slots do you want?" << endl;
+	cin >> inventorySlots;
+
+	while (!cin.good() || inventorySlots > 16)
+	{
+		cerr << "Please enter a number." << endl;
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+		cout << "How many inventory slots do you want?" << endl;
+		cin >> inventorySlots;
+	}
+
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+	for (int i = 0; i < inventorySlots; i++) {
+		inventory.push_back(Item("Empty", "None", 0));
+	}
+};
+
+
+void Help(vector<Item>& inventory) {
 	cout << "Here are a list of all of the commands: " << endl;
 
-	map<string, function<void(vector<Items>& inventory)>> func_list{
+	map<string, function<void(vector<Item>& inventory)>> func_list{
 		{"help", Help},
 		{"set", SetItem},
 		{"show_all", ShowAll},
 		{"view", View},
 		{"items", ShowAllItems},
 		{"exit", ShowAllItems},
+		{"clear", Clear},
+		{"restart", Restart},
 	};
 
 	for (auto const& [key, val] : func_list)
@@ -171,20 +211,30 @@ void Help(vector<Items>& inventory) {
 
 int main(int argc, char* argv[])
 {
-	itemSelection.push_back(AddItem("Shield", "A strong shield", 1));
-	itemSelection.push_back(AddItem("Potion", "A strength potion", 1));
-	itemSelection.push_back(AddItem("Gloves", "Leather Gloves", 1));
+	itemSelection.push_back(Item("Shield", "A strong shield", 1));
+	itemSelection.push_back(Item("Potion", "A strength potion", 1));
+	itemSelection.push_back(Item("Gloves", "Leather Gloves", 1));
 
-	map<string, function<void(vector<Items>& inventory)>> func_list{
-		{"help", Help},
+	map<string, function<void(vector<Item>& inventory)>> func_list{
 		{"set", SetItem},
 		{"show_all", ShowAll},
 		{"view", View},
 		{"items", ShowAllItems},
-
+		{"clear", Clear},
+		{"restart", Restart},
 	};
 
-	vector<Items> inventory;
+	auto help = [&func_list](vector<Item>& inventory)
+	{
+		for (auto const& [key, val] : func_list)
+		{
+			cout << key << endl;
+		}
+	};
+
+	func_list.emplace("help", help);
+
+	vector<Item> inventory;
     int inventorySlots;
 
 	cout << "How many inventory slots do you want?" << endl;
@@ -203,16 +253,19 @@ int main(int argc, char* argv[])
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 	for (int i = 0; i < inventorySlots; i++) {
-		inventory.push_back(AddItem("Empty", "None", 0));
+		inventory.push_back(Item("Empty", "None", 0));
 	}
 
 	while (true) 
 	{
+		cin.clear();
+
 		string commandInput = {};
 		cout << "What would you like to do? Type help for a list of all of the commands!\n";
-		getline(cin, commandInput);
+		cin >> commandInput;
 
 		if (commandInput == "exit") {
+			cout << "Exiting" << endl;
 			break;
 		};
 
