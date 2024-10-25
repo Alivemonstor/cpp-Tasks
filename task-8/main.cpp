@@ -202,11 +202,11 @@ void SearchItem(vector<Item>& inventory) {
 		cin >> input;
 	}
 
-	for (int i = 0; i < inventory.size(); i++)
+	for (int i = 0; i < itemSelection.size(); i++)
 	{
-		string string = inventory[i].name;
+		string string = itemSelection[i].name;
 		if (string.find(input) != string::npos) {
-			cout << inventory[i].name << endl;
+			cout << i << ". " << itemSelection[i].name << endl;
 		}
 	}
 
