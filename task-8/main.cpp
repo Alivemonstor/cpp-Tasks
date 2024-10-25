@@ -186,31 +186,36 @@ void Restart(vector<Item>& inventory) {
 	}
 };
 
+void SearchItem(vector<Item>& inventory) {
+	string input;
 
-void Help(vector<Item>& inventory) {
-	cout << "Here are a list of all of the commands: " << endl;
+	cout << "What do you want to search for?" << endl;
+	cin >> input;
 
-	map<string, function<void(vector<Item>& inventory)>> func_list{
-		{"help", Help},
-		{"set", SetItem},
-		{"show_all", ShowAll},
-		{"view", View},
-		{"items", ShowAllItems},
-		{"exit", ShowAllItems},
-		{"clear", Clear},
-		{"restart", Restart},
-	};
-
-	for (auto const& [key, val] : func_list)
+	while (!cin.good() || input.empty())
 	{
-		cout << key << endl;
+		cerr << "Please enter a string." << endl;
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+		cout << "What do you want to search for?" << endl;
+		cin >> input;
 	}
+
+	for (int i = 0; i < inventory.size(); i++)
+	{
+		string string = inventory[i].name;
+		if (string.find(input) != string::npos) {
+			cout << inventory[i].name << endl;
+		}
+	}
+
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 };
-
-
 
 int main(int argc, char* argv[])
 {
+	itemSelection.push_back(Item("Empty", "None", 0));
 	itemSelection.push_back(Item("Shield", "A strong shield", 1));
 	itemSelection.push_back(Item("Potion", "A strength potion", 1));
 	itemSelection.push_back(Item("Gloves", "Leather Gloves", 1));
@@ -222,10 +227,13 @@ int main(int argc, char* argv[])
 		{"items", ShowAllItems},
 		{"clear", Clear},
 		{"restart", Restart},
+		{"search" , SearchItem},
 	};
 
 	auto help = [&func_list](vector<Item>& inventory)
 	{
+		cout << "Heres a list of all of the commands:" << endl;
+		
 		for (auto const& [key, val] : func_list)
 		{
 			cout << key << endl;
