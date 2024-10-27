@@ -240,7 +240,15 @@ int main(int argc, char* argv[])
 		}
 	};
 
+	auto exit = [&func_list](vector<Item>& inventory)
+		{
+			cout << "Exiting" << endl;
+
+			return 0;
+		};
+
 	func_list.emplace("help", help);
+	func_list.emplace("exit", exit);
 
 	vector<Item> inventory;
     int inventorySlots;
@@ -248,7 +256,7 @@ int main(int argc, char* argv[])
 	cout << "How many inventory slots do you want?" << endl;
 	cin >> inventorySlots;
 
-	while(!cin.good() || inventorySlots > 16) 
+	while(!cin.good() || inventorySlots > 16 || inventorySlots < 1)
 	{
 		cerr << "Please enter a number." << endl;
 		cin.clear();
@@ -272,10 +280,7 @@ int main(int argc, char* argv[])
 		cout << "What would you like to do? Type help for a list of all of the commands!\n";
 		cin >> commandInput;
 
-		if (commandInput == "exit") {
-			cout << "Exiting" << endl;
-			break;
-		};
+
 
 		if (cin.fail() || func_list.find(commandInput) == func_list.end()) {
 			cerr << "Please enter a valid command" << endl;
