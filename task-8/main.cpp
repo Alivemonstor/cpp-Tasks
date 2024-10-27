@@ -25,6 +25,7 @@ vector<Item> itemSelection;
 
 void SetItem(vector<Item>& inventory) {
 	int itemSelect;
+	int invSlot;
 
 	cout << "Please Pick an item : " << endl;
 
@@ -53,7 +54,6 @@ void SetItem(vector<Item>& inventory) {
 
 	//Picking inventory slot
 
-	int itemSelectNew = 0;
 	cin.clear();
 
 
@@ -64,9 +64,9 @@ void SetItem(vector<Item>& inventory) {
 		cout << i << "." << inventory[i].name << endl;
 	}
 
-	cin >> itemSelectNew;
+	cin >> invSlot;
 
-	while (!cin.good() || itemSelectNew > inventory.size() - 1) {
+	while (!cin.good() || invSlot > inventory.size() - 1) {
 		cerr << "Please enter a number." << endl;
 
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -78,16 +78,16 @@ void SetItem(vector<Item>& inventory) {
 			cout << i << "." << inventory[i].name << endl;
 		}
 
-		cin >> itemSelectNew;
+		cin >> invSlot;
 	}
 
-	if (inventory[itemSelectNew].name == itemSelection[itemSelect].name) {
-		inventory[itemSelectNew].quantity += itemSelection[itemSelect].quantity;
+	if (inventory[invSlot].name == itemSelection[itemSelect].name) {
+		inventory[invSlot].quantity += itemSelection[itemSelect].quantity;
 	}
 	else {
-		inventory[itemSelectNew].name = itemSelection[itemSelect].name;
-		inventory[itemSelectNew].description = itemSelection[itemSelect].description;
-		inventory[itemSelectNew].quantity = itemSelection[itemSelect].quantity;
+		inventory[invSlot].name = itemSelection[itemSelect].name;
+		inventory[invSlot].description = itemSelection[itemSelect].description;
+		inventory[invSlot].quantity = itemSelection[itemSelect].quantity;
 	}
 
 	cin.clear();
@@ -288,6 +288,6 @@ int main(int argc, char* argv[])
 		}
 
 	}
-
+	 
     return 0;
 }
