@@ -280,15 +280,13 @@ int main(int argc, char* argv[])
 		cout << "What would you like to do? Type help for a list of all of the commands!\n";
 		cin >> commandInput;
 
-
-
-		if (cin.fail() || func_list.find(commandInput) == func_list.end()) {
+		if (cin.fail() || !func_list[commandInput]) {
 			cerr << "Please enter a valid command" << endl;
 		}
-
-		if (func_list.find(commandInput) != func_list.end()) {
+		else {
 			func_list[commandInput](inventory);
 		}
+
 	}
 
     return 0;
