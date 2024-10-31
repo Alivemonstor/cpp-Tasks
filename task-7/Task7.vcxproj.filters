@@ -10,4 +10,9 @@
       <UniqueIdentifier>{A5487F9D-31BA-3C2C-B75A-9B2B65E7E845}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Task7.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

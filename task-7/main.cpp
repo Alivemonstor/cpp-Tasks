@@ -1,37 +1,9 @@
 #include <iostream>
 #include <vector>
+#include "Task7.h"
 
 
 using namespace std;
-
-class ShopItem {
-    public:
-        string Name;
-        string Type;
-        int price;
-        int damage;
-        string Role;
-};
-
-ShopItem CreateShopItem(string name, string type, int price, int damage, string role) {
-    ShopItem shopItem;
-
-    shopItem.Name = name;
-    shopItem.Type = type;
-    shopItem.price = price;
-    shopItem.damage = damage;
-    shopItem.Role = role;
-
-    return shopItem;
-}
-
-class Player {
-    public:
-        string Name;
-        string ItemName = "none";
-        int damage;
-        string Role;
-};
 
 
 int main(int argc, char* argv[])
@@ -65,24 +37,24 @@ int main(int argc, char* argv[])
 
         // Creating the shop
 
-        shopVec.push_back(CreateShopItem("Great Sword", "Sword", 40, 100, "Knight"));
+        shopVec.push_back(ShopItem("Great Sword", "Sword", 40, 100, "Knight"));
 
-        shopVec.push_back(CreateShopItem("Scimitar", "Sword", 35, 75, "Knight"));
+        shopVec.push_back(ShopItem("Scimitar", "Sword", 35, 75, "Knight"));
 
-        shopVec.push_back(CreateShopItem("Dagger", "Sword", 10, 35, "Knight"));
+        shopVec.push_back(ShopItem("Dagger", "Sword", 10, 35, "Knight"));
 
-        shopVec.push_back(CreateShopItem("Longbow", "Bow", 20, 55, "Archer"));
+        shopVec.push_back(ShopItem("Longbow", "Bow", 20, 55, "Archer"));
 
-        shopVec.push_back(CreateShopItem("Crossbow", "Bow", 40, 100, "Archer"));
+        shopVec.push_back(ShopItem("Crossbow", "Bow", 40, 100, "Archer"));
 
-        shopVec.push_back(CreateShopItem("Rusty spear", "Spear", 10, 35, "Spearman"));
+        shopVec.push_back(ShopItem("Rusty spear", "Spear", 10, 35, "Spearman"));
 
-        shopVec.push_back(CreateShopItem("Iron spear", "Spear", 20, 65, "Spearman"));
+        shopVec.push_back(ShopItem("Iron spear", "Spear", 20, 65, "Spearman"));
 
         for (int i = 0; i < curPlayers.size(); i++) {
 
             for (int b = 0; b < shopVec.size(); b++) {
-                cout << b << ". " << shopVec[b].Name << "[" << shopVec[b].price << " coins, " << shopVec[b].damage << " damage]" << endl;
+                cout << b << ". " << shopVec[b].name << "[" << shopVec[b].price << " coins, " << shopVec[b].damage << " damage]" << endl;
             }
 
             while (curPlayers[i].ItemName == "none") {
@@ -91,8 +63,8 @@ int main(int argc, char* argv[])
                 cin >> tempSelect;
 
                 if (tempSelect <= shopVec.size() - 1 && tempSelect >= 0 && coinAmount >= shopVec[tempSelect].price) {
-                    curPlayers[i].ItemName = shopVec[tempSelect].Name;
-                    curPlayers[i].Role = shopVec[tempSelect].Role;
+                    curPlayers[i].ItemName = shopVec[tempSelect].name;
+                    curPlayers[i].Role = shopVec[tempSelect].role;
                     curPlayers[i].damage = shopVec[tempSelect].damage;
                     coinAmount -= shopVec[tempSelect].price;
                     shopVec.erase(shopVec.begin() + tempSelect);
