@@ -12,12 +12,12 @@ public:
 		x = 0.0f;
 		y = 0.0f;
 	}
-	Vector2(float x, float y)
+	Vector2(float a, float b)
 	{
-		x = x;
-		y = y;
+		x = a;
+		y = b;
 	}
-	Vector2(Vector2& other)
+	Vector2(const Vector2& other)
 	{
 		x = other.x;
 		y = other.y;

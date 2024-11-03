@@ -3,78 +3,55 @@
 #include <functional>
 #include <sstream>
 #include <map>
+#include <vector>
 
 using namespace std;
 
 void Distance() {
 	float distInput;
 	Vector2 vector1;
-	Vector2 vector2;
+	vector<Vector2> Vec;
 
-	cout << "Please type x" << endl;
-	cin >> distInput;
+	Vec.push_back(vector1);
+	Vec.push_back(vector1);
 
-	while (!cin.good()) {
-		cerr << "Please enter a number." << endl;
 
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	for (auto& val : Vec) {
+		cout << "Please type X" << endl;
+		cin >> distInput;
 
-		cout << "Please type x" << endl;
+		while (!cin.good()) {
+			cerr << "Please enter a number." << endl;
+
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+			cout << "Please type x" << endl;
+
+			cin >> distInput;
+		}
+		val.x = distInput;
+
+
+		cout << "Please type Y" << endl;
 
 		cin >> distInput;
+
+		while (!cin.good()) {
+			cerr << "Please enter a number." << endl;
+
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+			cout << "Please type y" << endl;
+
+			cin >> distInput;
+		}
+
+		val.y = distInput;
+
 	}
 
-	vector1.x = distInput;
 
-	cout << "Please type y" << endl;
-
-	cin >> distInput;
-
-	while (!cin.good()) {
-		cerr << "Please enter a number." << endl;
-
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-		cout << "Please type y" << endl;
-
-		cin >> distInput;
-	}
-
-	vector1.y = distInput;
-
-	cout << "Please type x" << endl;
-	cin >> distInput;
-
-	while (!cin.good()) {
-		cerr << "Please enter a number." << endl;
-
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-		cout << "Please type x" << endl;
-
-		cin >> distInput;
-	}
-
-	vector2.x = distInput;
-
-	cout << "Please type y" << endl;
-
-	cin >> distInput;
-
-	while (!cin.good()) {
-		cerr << "Please enter a number." << endl;
-
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-		cout << "Please type y" << endl;
-
-		cin >> distInput;
-	}
-
-	vector2.y = distInput;
-
-
-	float calcDist = Vector2::Distance(vector1, vector2);
+	float calcDist = Vector2::Distance(Vec[0], Vec[1]);
 	cout << calcDist << endl;
 
 }
