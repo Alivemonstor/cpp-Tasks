@@ -57,6 +57,69 @@ void Distance() {
 }
 
 void FOVCheck() {
+	float FOVInput;
+
+	Vector2 vector1;
+	vector<Vector2> Vec;
+
+	Vec.push_back(vector1);
+	Vec.push_back(vector1);
+
+
+	for (auto& val : Vec) {
+		cout << "Please type X" << endl;
+		cin >> FOVInput;
+
+		while (!cin.good()) {
+			cerr << "Please enter a number." << endl;
+
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+			cout << "Please type x" << endl;
+
+			cin >> FOVInput;
+		}
+		val.x = FOVInput;
+
+
+		cout << "Please type Y" << endl;
+
+		cin >> FOVInput;
+
+		while (!cin.good()) {
+			cerr << "Please enter a number." << endl;
+
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+			cout << "Please type y" << endl;
+
+			cin >> FOVInput;
+		}
+
+		val.y = FOVInput;
+
+	}
+
+	cout << "Please type FOV Direction" << endl;
+
+	cin >> FOVInput;
+
+	while (!cin.good()) {
+		cerr << "Please enter a number." << endl;
+
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+		cout << "Please type FOV Direction" << endl;
+
+		cin >> FOVInput;
+	}
+
+
+	Vec[0].Normalize();
+	Vec[1].Normalize();
+
+	Vector2 FOV = Vector2::Dot(Vec[0], Vec[1]);
+
 
 }
 
