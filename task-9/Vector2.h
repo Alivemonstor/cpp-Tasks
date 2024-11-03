@@ -76,11 +76,12 @@ public:
 		x /= mag;
 		y /= mag;
 	}
-	static Vector2 Distance(Vector2& a, Vector2& b)
+	static float Distance(Vector2& a, Vector2& b)
 	{
 		Vector2 result;
 		result.x = a.x - b.x;
 		result.y = a.y - b.y;
-		return result;
+		float distancesqrd = sqrt((result.x) * (result.x) + (result.y) * (result.y));
+		return distancesqrd;
 	}
 };

@@ -73,10 +73,9 @@ void Distance() {
 
 	vector2.y = distInput;
 
-	// ignore everything above this its terrible.
 
-	Vector2 calcDist = vector1.Distance(vector1, vector2);
-	cout << calcDist.x << " " << calcDist.y << endl;
+	float calcDist = Vector2::Distance(vector1, vector2);
+	cout << calcDist << endl;
 
 }
 
