@@ -52,16 +52,15 @@ public:
 		y = other.y;
 		return *this;
 	}
-	static Vector2 Dot(Vector2& a, Vector2& b)
+	static float Dot(Vector2& a, Vector2& b)
 	{
-		Vector2 result;
-		result.x = a.x * b.x;
-		result.y = a.y * b.y;
+		float result;
+		result = a.x*b.x+a.y*b.y;
 		return result;
 	}
 	float Magnitude()
 	{
-		return sqrt(x * x + y * y);
+		return sqrt(pow(x, 2) + pow(y, 2));
 	}
 	Vector2 Normalized()
 	{

@@ -4,6 +4,7 @@
 #include <sstream>
 #include <map>
 #include <vector>
+#include <numbers>
 
 using namespace std;
 
@@ -79,6 +80,8 @@ void FOVCheck() {
 
 			cin >> FOVInput;
 		}
+
+
 		val.x = FOVInput;
 
 
@@ -101,26 +104,60 @@ void FOVCheck() {
 	}
 
 	cout << "Please type FOV Direction" << endl;
+	Vector2 FOVRDirection;
 
-	cin >> FOVInput;
 
-	while (!cin.good()) {
-		cerr << "Please enter a number." << endl;
+		cout << "Please type X" << endl;
+		cin >> FOVInput;
 
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		while (!cin.good()) {
+			cerr << "Please enter a number." << endl;
 
-		cout << "Please type FOV Direction" << endl;
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+			cout << "Please type x" << endl;
+
+			cin >> FOVInput;
+		}
+		FOVRDirection.x = FOVInput;
+
+
+		cout << "Please type Y" << endl;
 
 		cin >> FOVInput;
-	}
+
+		while (!cin.good()) {
+			cerr << "Please enter a number." << endl;
+
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+			cout << "Please type y" << endl;
+
+			cin >> FOVInput;
+		}
+
+		FOVRDirection.y = FOVInput;
 
 
-	Vec[0].Normalize();
-	Vec[1].Normalize();
-
-	Vector2 FOV = Vector2::Dot(Vec[0], Vec[1]);
 
 
+
+	FOVRDirection.Normalize();
+
+	cout << Vec[0].x << Vec[0].y << endl;
+	cout << Vec[1].x << Vec[1].y << endl;
+
+	Vector2 HowTo = Vec[0] - Vec[1];
+
+
+	HowTo.Normalize();
+
+	cout << HowTo.x << HowTo.y << endl;
+
+	float FOV = acos(Vector2::Dot(FOVRDirection, HowTo));
+
+
+	cout << (FOV * 180/numbers::pi_v<float>)  << endl;
 }
 
 int main(int argc, char* argv[])
@@ -155,7 +192,7 @@ int main(int argc, char* argv[])
 		cout << "What mode would you like to choose, type help to see the commands!" << endl;
 		cin >> commandInput;
 
-		if (cin.fail() || !commands[commandInput]) {
+		if (cin.fail() || !commands.contains(commandInput)) {
 			cerr << "Please enter a valid command";
 		}
 		else
