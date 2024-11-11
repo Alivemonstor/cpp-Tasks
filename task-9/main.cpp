@@ -71,6 +71,7 @@ void FOVCheck() {
 		cout << "Please type X" << endl;
 		cin >> FOVInput;
 
+
 		while (!cin.good()) {
 			cerr << "Please enter a number." << endl;
 
@@ -83,7 +84,7 @@ void FOVCheck() {
 
 
 		val.x = FOVInput;
-
+		cout << "[" << val.x << ", ]" << endl;
 
 		cout << "Please type Y" << endl;
 
@@ -100,6 +101,7 @@ void FOVCheck() {
 		}
 
 		val.y = FOVInput;
+		cout << "[" << val.x << "," << val.y << "]" << endl;
 
 	}
 
@@ -144,8 +146,6 @@ void FOVCheck() {
 
 	FOVRDirection.Normalize();
 
-	cout << Vec[0].x << Vec[0].y << endl;
-	cout << Vec[1].x << Vec[1].y << endl;
 
 	Vector2 HowTo = Vec[0] - Vec[1];
 
@@ -156,8 +156,15 @@ void FOVCheck() {
 
 	float FOV = acos(Vector2::Dot(FOVRDirection, HowTo));
 
+	float finalAngle = FOV * 180 / numbers::pi_v<float>;
 
-	cout << (FOV * 180/numbers::pi_v<float>)  << endl;
+
+	if (finalAngle >= 0.0f + 45.0f || finalAngle  <= 180.0f - 45.0f) {
+		cout << "this man got seen yk" << finalAngle << endl;
+	}
+	else {
+		cout << "he aint see him" << finalAngle << endl;
+	}
 }
 
 int main(int argc, char* argv[])
