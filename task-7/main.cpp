@@ -3,7 +3,6 @@
 #include "Task7.h"
 
 
-using namespace std;
 
 
 int main(int argc, char* argv[])
@@ -13,8 +12,8 @@ int main(int argc, char* argv[])
     int tempSelect = 0;
     bool finalChoice = false;
 
-    vector<Player> curPlayers;
-    vector<ShopItem> shopVec;
+    std::vector<Player> curPlayers;
+    std::vector<ShopItem> shopVec;
 
     Player Player1;
     curPlayers.push_back(Player1);
@@ -22,18 +21,18 @@ int main(int argc, char* argv[])
     curPlayers.push_back(Player1);
 
     for (int i = 0; i < amountOfPlayers; i++) {
-        cout << "Player #" << i+1 << " enter your name: ";
-        cin >> curPlayers[i].Name;
+        std::cout << "Player #" << i+1 << " enter your name: ";
+        std::cin >> curPlayers[i].Name;
     }
     
 
     for (int i = 0; i < curPlayers.size(); i++) {
-        cout << "Welcome " << curPlayers[i].Name<< endl;
+        std::cout << "Welcome " << curPlayers[i].Name<< std::endl;
     }
 
     while (finalChoice == false) {
 
-        cout << "Welcome to the shop, at the moment you all have " << coinAmount << " coins." << endl;
+        std::cout << "Welcome to the shop, at the moment you all have " << coinAmount << " coins." << std::endl;
 
         // Creating the shop
 
@@ -54,13 +53,13 @@ int main(int argc, char* argv[])
         for (int i = 0; i < curPlayers.size(); i++) {
 
             for (int b = 0; b < shopVec.size(); b++) {
-                cout << b << ". " << shopVec[b].name << "[" << shopVec[b].price << " coins, " << shopVec[b].damage << " damage]" << endl;
+                std::cout << b << ". " << shopVec[b].name << "[" << shopVec[b].price << " coins, " << shopVec[b].damage << " damage]" << std::endl;
             }
 
             while (curPlayers[i].ItemName == "none") {
-                cout << "You have " << coinAmount << " coins" << endl;
-                cout << curPlayers[i].Name << " Please enter the weapon you would like to buy: ";
-                cin >> tempSelect;
+                std::cout << "You have " << coinAmount << " coins" << std::endl;
+                std::cout << curPlayers[i].Name << " Please enter the weapon you would like to buy: ";
+                std::cin >> tempSelect;
 
                 if (tempSelect <= shopVec.size() - 1 && tempSelect >= 0 && coinAmount >= shopVec[tempSelect].price) {
                     curPlayers[i].ItemName = shopVec[tempSelect].name;
@@ -68,17 +67,17 @@ int main(int argc, char* argv[])
                     curPlayers[i].damage = shopVec[tempSelect].damage;
                     coinAmount -= shopVec[tempSelect].price;
                     shopVec.erase(shopVec.begin() + tempSelect);
-                    cout << curPlayers[i].Name << " You are now a " << curPlayers[i].Role << " with a " << curPlayers[i].ItemName << " and you do " << curPlayers[i].damage << " damage" << endl;
+                    std::cout << curPlayers[i].Name << " You are now a " << curPlayers[i].Role << " with a " << curPlayers[i].ItemName << " and you do " << curPlayers[i].damage << " damage" << std::endl;
                 }
                 else {
-                    cerr << "This is not a valid shop item or you cannot afford it" << endl;
+                    std::cerr << "This is not a valid shop item or you cannot afford it" << std::endl;
                 }
             }
         }
 
-        string choice;
-        cout << "Is this your final choice? (yes/no)" << endl;
-        cin >> choice;
+        std::string choice;
+        std::cout << "Is this your final choice? (yes/no)" << std::endl;
+        std::cin >> choice;
 
         if (choice == "yes") {
             finalChoice = true;
@@ -93,7 +92,7 @@ int main(int argc, char* argv[])
     }
 
     for (int i = 0; i < curPlayers.size(); i++) {
-        cout << "Player " << i + 1 << " (" << curPlayers[i].Name << "), Role: " << curPlayers[i].Role << ", Weapon: " << curPlayers[i].ItemName << ", Damage: " << curPlayers[i].damage << endl;
+        std::cout << "Player " << i + 1 << " (" << curPlayers[i].Name << "), Role: " << curPlayers[i].Role << ", Weapon: " << curPlayers[i].ItemName << ", Damage: " << curPlayers[i].damage << std::endl;
     }
 
 

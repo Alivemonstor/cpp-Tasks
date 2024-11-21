@@ -1,22 +1,21 @@
 ﻿#include <iostream>
 #include <sstream>
-using namespace std;
 
 int main(int argc, char* argv[])
 {
     while (true) {
-        string user_string;
+        std::string user_string;
 
-        cout << "Please Enter a string: ";
-        getline(cin, user_string);
+        std::cout << "Please Enter a string: ";
+        std::getline(std::cin, user_string);
 
         if (user_string.empty())
         {
-            cerr << "Please input a string, cannot be empty!" << endl;
+            std::cerr << "Please input a string, cannot be empty!" << std::endl;
         }
 
-        stringstream side_lines;
-        stringstream middle_line;
+        std::stringstream side_lines;
+        std::stringstream middle_line;
 
         for (size_t index = 0; index < user_string.size(); index++)
         {
@@ -31,14 +30,14 @@ int main(int argc, char* argv[])
             middle_line << "|  " << user_string[index];
         }
 
-        side_lines << "+" << endl;
-        middle_line << "  |" << endl;
+        side_lines << "+" << std::endl;
+        middle_line << "  |" << std::endl;
 
         if (!user_string.empty())
         {
-			cout << side_lines.str();
-			cout << middle_line.str();
-			cout << side_lines.str();
+            std::cout << side_lines.str();
+            std::cout << middle_line.str();
+            std::cout << side_lines.str();
         }
     }
 }

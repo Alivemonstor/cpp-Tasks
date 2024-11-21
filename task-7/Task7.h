@@ -1,16 +1,15 @@
 #pragma once
 #include <string>
 
-using namespace std;
 
 
 class ShopItem {
 public:
-    string name;
-    string type;
+    std::string name;
+    std::string type;
     int price;
     int damage;
-    string role;
+    std::string role;
 public:
 	ShopItem() {
 		name = "none";
@@ -19,7 +18,7 @@ public:
 		damage = 0;
 		role = "none";
 	}
-    ShopItem (const string& inName, const string& inType, int inPrice, int inDamage, const string& inRole) {
+    ShopItem (const std::string& inName, const std::string& inType, int inPrice, int inDamage, const std::string& inRole) {
 
         name = inName;
         type = inType;
@@ -31,10 +30,10 @@ public:
 
 class Player {
 public:
-    string Name;
-    string ItemName = "none";
+    std::string Name;
+    std::string ItemName = "none";
     int damage;
-    string Role;
+    std::string Role;
 };
 
 

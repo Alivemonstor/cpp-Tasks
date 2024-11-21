@@ -3,42 +3,41 @@
 #include <algorithm>
 #include <cstring>
 
-using namespace std;
 
 int main(int argc, char* argv[])
 {
-    string userInput;
+    std::string userInput;
     bool hasFound = true;
 
-	cout << "Enter a string: ";
+    std::cout << "Enter a string: ";
 
-    getline(cin, userInput);
+    std::getline(std::cin, userInput);
 
     for (char c : userInput)
     {
         if (!isalpha(static_cast<unsigned char>(c)) && !isspace(static_cast<unsigned char>(c)) && c != '.' && c != '!' && c != '?') {
-            cerr << "This string contains a non alphabetical character";
+            std::cerr << "This string contains a non alphabetical character";
             return 0;
         }
     }
     transform(userInput.begin(), userInput.end(), userInput.begin(), toupper);
-    cout << "Upper Case: " << userInput << endl;
+    std::cout << "Upper Case: " << userInput << std::endl;
 
     transform(userInput.begin(), userInput.end(), userInput.begin(), tolower);
-    cout << "Lower Case: " << userInput << endl;
+    std::cout << "Lower Case: " << userInput << std::endl;
 
-    cout << "Sentence Casing: ";
+    std::cout << "Sentence Casing: ";
     for (char c : userInput)
     {
 
 		if (isalpha(static_cast<unsigned char>(c)) && hasFound)
 		{
-            cout << char(toupper(c));
+            std::cout << char(toupper(c));
 			hasFound = false;
 		}
 		else
 		{
-			cout << c;
+            std::cout << c;
 		}
 
         if (c == '.' || c == '!' || c == '?')
@@ -46,20 +45,20 @@ int main(int argc, char* argv[])
             hasFound = true;
         }
 	}
-	cout << endl;
+    std::cout << std::endl;
 
-    cout << "Alternate Case: ";
+    std::cout << "Alternate Case: ";
     size_t index = 0;
 
     for (char c : userInput)
     {
         if (index % 2 == 0)
         {
-            cout << char(isupper(static_cast<unsigned char>(c)) ? tolower(c) : toupper(c));
+            std::cout << char(isupper(static_cast<unsigned char>(c)) ? tolower(c) : toupper(c));
         }
         else
         {
-            cout << c;
+            std::cout << c;
         }
 
         if (isalpha(static_cast<unsigned char>(c))) {

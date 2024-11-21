@@ -1,6 +1,5 @@
 #include <iostream>
 #define ERROR_STRING_INPUT 2
-using namespace std;
 
 
 
@@ -8,25 +7,25 @@ using namespace std;
 int main(int argc, char* argv[])
 {
     float number = 0.0f;
-	string output = "Invalid input, please input a number!";
+	std::string output = "Invalid input, please input a number!";
 
 
-	cout << "Enter a number: ";
-	cin >> number;
+	std::cout << "Enter a number: ";
+	std::cin >> number;
 
-	if (cin.fail()) {
-		cerr << output << endl;
+	if (std::cin.fail()) {
+		std::cerr << output << std::endl;
 		return ERROR_STRING_INPUT;
 	}
 
-	cout << "neg("<< number <<"): " << -number << endl;
-	cout << "abs(" << number << "): " << abs(number) << endl;
-	cout << "pow2(" << number << "): " << pow(number, 2) << endl;
-	cout << "pow3(" << number << "): " << pow(number, 3) << endl;
-	cout << "sqrt(" << number << "): " << sqrt(abs(number)) << endl;
-	cout << "floor(" << number << "): " << floorf(number) << endl;
-	cout << "ceil(" << number << "): " << ceilf(number) << endl;
-	cout << "round(" << number << "): " << roundf(number) << endl;
+	std::cout << "neg("<< number <<"): " << -number << std::endl;
+	std::cout << "abs(" << number << "): " << abs(number) << std::endl;
+	std::cout << "pow2(" << number << "): " << pow(number, 2) << std::endl;
+	std::cout << "pow3(" << number << "): " << pow(number, 3) << std::endl;
+	std::cout << "sqrt(" << number << "): " << sqrt(abs(number)) << std::endl;
+	std::cout << "floor(" << number << "): " << floorf(number) << std::endl;
+	std::cout << "ceil(" << number << "): " << ceilf(number) << std::endl;
+	std::cout << "round(" << number << "): " << roundf(number) << std::endl;
 
 
     return 0;

@@ -3,8 +3,6 @@
 #include <vector>
 #include <iostream>
 
-using namespace std;
-
 int main(int argc, char* argv[])
 {
     const int RNG = random(0, 100);
@@ -12,9 +10,9 @@ int main(int argc, char* argv[])
     bool hasGuessed = false;
     int userGuess = 0;
 
-    cout << RNG << endl;
+    std::cout << RNG << std::endl;
 
-    map<int, string> mp;
+    std::map<int, std::string> mp;
     mp[50] = "freezing";
     mp[35] = "colder";
     mp[25] = "cold";
@@ -26,11 +24,11 @@ int main(int argc, char* argv[])
 
 
     while (true) {
-        cout << "Please enter a guess: ";
-        cin >> userGuess;
+        std::cout << "Please enter a guess: ";
+        std::cin >> userGuess;
 
-        if (cin.fail() || userGuess > 100 || userGuess < 0) {
-            cerr << "Please enter a valid number between 0-100." << endl;
+        if (std::cin.fail() || userGuess > 100 || userGuess < 0) {
+            std::cerr << "Please enter a valid number between 0-100." << std::endl;
         }
         else {
             int diff = abs(userGuess - RNG);
@@ -38,7 +36,7 @@ int main(int argc, char* argv[])
             amountOfGuesses++;
             
             if (diff == 0) {
-                cout << "Well done! The number was:" << RNG << " It took you " << amountOfGuesses << " guesses.";
+                std::cout << "Well done! The number was:" << RNG << " It took you " << amountOfGuesses << " guesses.";
                 return 0;
             }
 
@@ -47,7 +45,7 @@ int main(int argc, char* argv[])
             {
                 if (key >= diff)
                 {
-                    cout << val << endl;
+                    std::cout << val << std::endl;
                     break;
                 }
             }
